@@ -70,10 +70,8 @@ exports.updateUser = async (req, res) => {
 }
 exports.deleteUser = async (req, res, next) => {
     try {
-        const cart = req.user.cart
         await req.user.deleteOne()
-        req.cart = cart
-        next()
+        res.json(`Successfully deleted ${req.user.email}`)
     } catch (error) {
         res.status(400).json({message: error.message})
     }
