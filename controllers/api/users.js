@@ -20,14 +20,11 @@ exports.auth = async (req, res, next) => {
 
 exports.createUser = async (req, res, next) => {
     try {
-        console.log('first')
         const user = new User(req.body)
         await user.save()
-        console.log('sec')
         const token = await user.generateAuthToken()
         req.user = user
         req.token = token
-        console.log('third')
         next()
     } catch (error) {
         res.status(400).json({message: error.message})
